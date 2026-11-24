@@ -10,9 +10,9 @@ One CSV per season, one row per player (GSIS id, name, position, team), with:
 
 | Group | Columns |
 |---|---|
-| Next Gen Stats, receiving | separation, cushion, YAC and YAC over expected, intended air yards, catch %, targets, yards |
-| Next Gen Stats, rushing | rush yards over expected (total and per attempt), efficiency, time to line of scrimmage |
-| Next Gen Stats, passing | time to throw, completion % over expected, aggressiveness, air yards |
+| Player tracking, receiving | separation, cushion, YAC and YAC over expected, intended air yards, catch %, targets, yards |
+| Player tracking, rushing | rush yards over expected (total and per attempt), efficiency, time to line of scrimmage |
+| Player tracking, passing | time to throw, completion % over expected, aggressiveness, air yards |
 | Season totals and rank | receiving and rushing yards, passing EPA, PPR fantasy points, sacks, QB hits, solo tackles, passes defended, interceptions |
 
 With `--combine`, it also writes `combine_matched.csv`: your Combine rows with the outcomes beside them.

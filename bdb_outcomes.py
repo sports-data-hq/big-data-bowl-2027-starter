@@ -4,7 +4,7 @@ Big Data Bowl 2027 starter: regular-season outcomes for NFL players, ready to jo
 The competition asks how Combine sensor tracking links to regular-season performance. Kaggle supplies the Combine
 side. This script pulls the regular-season side from EndzoneAPI in a few bulk calls per season:
 
-  - Next Gen Stats season aggregates: receiving (separation, cushion, YAC over expected), rushing (yards over
+  - Player tracking season aggregates: receiving (separation, cushion, YAC over expected), rushing (yards over
     expected, efficiency) and passing (time to throw, completion % over expected, air yards).
   - Season totals and ranks for the stats that usually stand in for "performance": receiving and rushing yards,
     passing EPA, PPR fantasy points, and for defenders sacks, QB hits, solo tackles, passes defended, interceptions.
@@ -29,7 +29,7 @@ import pandas as pd
 import requests
 
 BASE = "https://mcp.endzoneapi.com/v1"
-NGS_SOURCES = ["ngs_receiving", "ngs_rushing", "ngs_passing"]
+TRACKING_SOURCES = ["tracking_receiving", "tracking_rushing", "tracking_passing"]
 # (stat, position or None, how many): totals that are common "regular-season performance" targets.
 LEADERS = [
     ("receiving_yards", "WR", 100), ("receiving_yards", "TE", 60), ("receiving_yards", "RB", 60),
@@ -69,7 +69,7 @@ def call(tool, **params):
 
 def season_outcomes(season):
     frames = []
-    for src in NGS_SOURCES:
+    for src in TRACKING_SOURCES:
         d = call("get_advanced_stats", source=src, season=season, week=0, limit=200)
         rows = [{"player_id": s["player_id"], "name": s["name"], "position": s["position"], "team": s["team"],
                  **{f"{src}_{k}": v for k, v in (s.get("metrics") or {}).items()}} for s in d.get("stats", [])]
